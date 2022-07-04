@@ -1,6 +1,7 @@
 package org.bank.controller
 
 import org.bank.exception.AccountNotFoundException
+import org.bank.exception.NotPositiveTransferException
 import org.bank.exception.TransferNotEnoughMoneyException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -13,23 +14,10 @@ import javax.validation.ConstraintViolationException
 @ControllerAdvice
 class GeneralExceptionHandler : ResponseEntityExceptionHandler() {
 
-    @ExceptionHandler(ConstraintViolationException::class)
+    @ExceptionHandler(value = [ConstraintViolationException::class, AccountNotFoundException::class, TransferNotEnoughMoneyException::class, NotPositiveTransferException::class])
     fun handleConstraintViolationException(exception: ConstraintViolationException, webRequest: ServletWebRequest) =
         ResponseEntity(
             exception.message,
             HttpStatus.BAD_REQUEST
-        )
-
-    @ExceptionHandler(AccountNotFoundException::class)
-    fun handleAccountNotFound(exception: AccountNotFoundException, webRequest: ServletWebRequest) = ResponseEntity(
-        exception.message,
-        HttpStatus.BAD_REQUEST,
-    )
-
-    @ExceptionHandler(TransferNotEnoughMoneyException::class)
-    fun handleTransferEnoughMoney(exception: TransferNotEnoughMoneyException, webRequest: ServletWebRequest) =
-        ResponseEntity(
-            exception.message,
-            HttpStatus.BAD_REQUEST,
         )
 }

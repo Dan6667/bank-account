@@ -23,7 +23,6 @@ class AccountServiceConcurrencyTest {
     private lateinit var accountRepository: AccountRepository
 
     private lateinit var accountFrom: AccountEntity
-
     private lateinit var accountTo: AccountEntity
 
     @BeforeEach
@@ -55,8 +54,12 @@ class AccountServiceConcurrencyTest {
 
         firstHolderMoney shouldBeIn arrayOf(90, 50, 40)
         when (firstHolderMoney) {
+            // first transaction executed and second canceled
             90L -> secondHolderMoney shouldBe 10
+            // second transaction executed, first canceled
             50L -> secondHolderMoney shouldBe 50
+            // both transactions executed sequentially
+            // very unlikely, but happens in < 1% cases
             40L -> secondHolderMoney shouldBe 60
         }
     }

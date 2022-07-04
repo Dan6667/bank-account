@@ -1,5 +1,5 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.6.10'
+    id 'org.jetbrains.kotlin.jvm' version '1.7.0'
     id 'org.springframework.boot' version '2.7.1'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
@@ -24,7 +24,7 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.2'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-    testImplementation 'io.mockk:mockk-common:1.12.4'
+    testImplementation 'io.mockk:mockk:1.12.4'
     testImplementation 'io.kotest:kotest-runner-junit5:5.3.1'
     testImplementation 'com.h2database:h2:1.4.194'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
